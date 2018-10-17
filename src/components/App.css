@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900');
+
+html, body{
+	font-family: 'Poppins', sans-serif;
+	font-size: 16px;
+}
+
+html, body, p, a, h1, h2, h3, h4, h5, span, fieldset, input, form {
+    box-sizing: border-box;
+    margin: 0;
+	padding: 0;
+}
+
+body {
+	height: 100vh;
+}
+
+.ace-form_container{
+	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
+	display: flex;
+	height: 100vh;
+}
+
+.ace-heading{
+	align-items: center;
+	display: flex;
+	color: #f8f8f8;
+	flex-direction: column;
+	height: 100%;
+	justify-content: center;
+	width: 100%;
+}
+
+.ace-heading__title {
+	text-transform: capitalize;
+	font-size: 5rem;
+	font-weight: 600;
+	margin-bottom: 1.5rem;
+}
+
+.ace-heading__subtitle {
+	font-size: 2.5rem;
+	font-weight: 300;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+.ace-form {
+	box-sizing: border-box; 
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin: 0;
+	min-width: 400px; 
+	padding: 4rem 1.8rem;
+    background: #f8f8f8;
+    height: 100%;
+    width: 30%;
+}
+
+.ace-form fieldset{
+	border: none;
+}
+
+.ace-form legend {
+	font-size: 1.8rem;
+	font-weight: 700;
+	margin-bottom: 4rem;
+	text-transform: uppercase;
+}
+.ace-form p{
+	display: flex;
+    flex-direction: column;
+	margin-bottom: 25px;
+}
+
+.ace-form label{
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+.ace-form input {
+	font-size: 1rem;
+	line-height: 30px;
+	padding: 0 1.2rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.ace-form button[type=submit]{
+	background: #fff;
+	border-radius: 5px;
+	border: 2px solid #23D5AB;
+	color: #23D5AB;
+	cursor: pointer;
+	font-size: 1.2rem;
+	height: 40px;
+	margin: 2rem 0;
+	text-transform: uppercase;
+	transition: all ease-in .2s;
+	width: 100%;
+
+}
+
+.ace-form button[type=submit]:hover{
+	background: #23D5AB;
+	color: #f8f8f8;
+}
+
+.ace-form__link {
+	background: #fff;
+	border-radius: 5px;
+	border: 2px solid #0e23e2;
+	color: #0e23e2;
+	cursor: pointer;
+	font-size: 1.2rem;
+	height: 40px;
+	margin: 2rem 0;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: all ease-in .2s;
+	width: 100%;
+	line-height: 36px;
+}
+
+.ace-form__link:hover{
+	background: #0e23e2;
+	color: #f8f8f8;
+}
+
+
+.ace-wraper{
+    display: grid;
+    grid-template-areas: "header header" "menu content";
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 70px 1fr;
+}
+
+.ace-header {  
+    grid-area: header; 
+}
+
+.ace-nav {
+    grid-area: menu;
+}
+
+.ace-content { 
+    grid-area: content; 
+}
+
+
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
