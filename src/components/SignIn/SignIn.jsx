@@ -17,12 +17,13 @@ class SignIn extends Component {
 
         this.handleLogin = this.handleLogin.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleLostPass = this.handleLostPass.bind(this)
         this.handleDisconectLogin = this.handleDisconectLogin.bind(this)
     }
 
     handleDisconectLogin() {
         firebase.auth().signOut().then(function () {
-            alert('você foi desconectado com sucesso :)')
+            alert('Até mais.')
         }).catch(function (error) {
             alert('Por algum motivo, não foi efetuado o loggout! tente novamente mais tarde!')
         });
@@ -32,6 +33,15 @@ class SignIn extends Component {
         this.setState({
             [target.name]: target.value,
         })
+    }
+
+    handleLostPass() {
+        const auth = firebase.auth()
+        auth.sendPasswordResetEmail(this.state.login).then(function () {
+            alert("Um email foi enviado para você com mais detalhes para a recuperação de senha.")
+        }).catch(function (error) {
+            alert("Por algum motivo não conseguimos enviar o email de recuperação. Tente novamente mais tarde.")
+        });
     }
 
     handleLogin(e) {
@@ -92,6 +102,7 @@ class SignIn extends Component {
 
                                     <button type="submit">Entrar</button>
                                 </fieldset>
+                                <p className="ace-form__lostpass" onClick={this.handleLostPass}>Perdeu a senha</p>
                                 <Link className="ace-form__link" to="/sign-up">Cadastre-se</Link>
                             </form>
                         </div>
