@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from '../../firebase'
 import 'firebase/auth'
 import { Link, Redirect } from 'react-router-dom'
+import Modal from 'react-modal'
 
 import './SignIn.css'
 
@@ -13,12 +14,23 @@ class SignIn extends Component {
             login: '',
             pass: '',
             isLogged: false,
+            modalIsOpen: false,
         }
 
-        this.handleLogin = this.handleLogin.bind(this)
+        this.closeModal = this.closeModal.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.handleLostPass = this.handleLostPass.bind(this)
         this.handleDisconectLogin = this.handleDisconectLogin.bind(this)
+        this.handleLogin = this.handleLogin.bind(this)
+        this.handleLostPass = this.handleLostPass.bind(this)
+        this.openModal = this.openModal.bind(this)
+    }
+
+    openModal() {
+        this.setState({ modalIsOpen: true });
+    }
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
     }
 
     handleDisconectLogin() {
@@ -102,7 +114,30 @@ class SignIn extends Component {
 
                                     <button type="submit">Entrar</button>
                                 </fieldset>
-                                <p className="ace-form__lostpass" onClick={this.handleLostPass}>Perdeu a senha</p>
+                                <p className="ace-form__lostpass" onClick={this.openModal}>Perdeu a senha</p>
+                                <Modal
+                                    isOpen={this.state.modalIsOpen}
+                                    onAfterOpen={this.afterOpenModal}
+                                    onRequestClose={this.closeModal}
+                                    contentLabel="Example Modal"
+                                >
+                                    <p>Por favor, insira seu email para que possamos enviar um email de recuperação de senha.</p>
+                                    <form action="" method="">
+                                        <fieldset>
+                                            <legend>Recupere sua senha</legend>
+                                            <p>
+                                                <label htmlFor="login">Email</label>
+                                                <input
+                                                    type="login"
+                                                    name="login"
+                                                    id="login"
+                                                    value={this.state.login}
+                                                    onChange={this.handleChange}
+                                                />
+                                            </p>
+                                        </fieldset>
+                                    </form>
+                                </Modal>
                                 <Link className="ace-form__link" to="/sign-up">Cadastre-se</Link>
                             </form>
                         </div>
