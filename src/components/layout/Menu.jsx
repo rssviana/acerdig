@@ -8,6 +8,7 @@ class Menu extends React.Component {
                 <Link to="/dashboard/exames" >Provas</Link>
                 <Link to="/dashboard/artigos" >Trabalho de conclusão de módulos</Link>
                 <Link to="/dashboard/trabalhos" >Trabalhos</Link>
+                <Link className="ace-btn-contribua" to="/upload">Contribua</Link>
             </nav>
         )
     }

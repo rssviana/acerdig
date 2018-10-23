@@ -1,18 +1,6 @@
-.ace-wraper{
+.ace-wrapper{
     display: grid;
     grid-template-areas: "header header" "menu content";
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 250px 1fr;
     grid-template-rows: 70px 1fr;
-}
-
-.ace-header {  
-    grid-area: header; 
-}
-
-.ace-nav {
-    grid-area: menu;
-}
-
-.ace-content { 
-    grid-area: content; 
 }
