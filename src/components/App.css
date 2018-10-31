@@ -7,7 +7,7 @@ html, body{
 	font-size: 16px;
 }
 
-html, body, p, a, h1, h2, h3, h4, h5, span, fieldset, input, form {
+html, body, p, a, h1, h2, h3, h4, h5, span, fieldset, input, form, figure {
     box-sizing: border-box;
     margin: 0;
 	padding: 0;
@@ -51,7 +51,7 @@ body {
 }
 
 .ace-heading__subtitle {
-	font-size: 2.5rem;
+	font-size: 2rem;
 	font-weight: 300;
 	font-family: 'Lato', sans-serif;
 	text-align: center;
@@ -161,7 +161,15 @@ body {
 	-webkit-animation: Gradient 15s ease infinite;
 	-moz-animation: Gradient 15s ease infinite;
 	animation: Gradient 15s ease infinite;
-	padding: 0 1.5rem;
+	padding: 0 1rem;
+	-webkit-box-shadow: 5px 0px 12px -3px rgb(82, 80, 80);
+	-moz-box-shadow: 5px 0px 12px -3px rgb(82, 80, 80);
+	box-shadow: 5px 0px 12px -3px rgb(82, 80, 80);
+}
+.ace-header__heading {
+	color: #f8f8f8;
+	font-family: 'Lobster', cursive;
+	font-size: 2.5rem;
 }
 
 .ace-nav {
@@ -169,29 +177,33 @@ body {
 	grid-area: menu;
 	display: flex;
 	flex-direction: column;
-	background: #f8f8f8;
+	background: #e8e5e5;
 	border-right: 1px solid #ccc;
-	height: calc(100vh - 70px);
+	min-height: calc(100vh - 70px);
+	height: 100%;
 	padding: 2rem 1rem 5rem 1rem;
 }
 
 .ace-content { 
 	grid-area: content; 
+	background: #f8f8f8;
 }
 .ace-user-credentials{
 	display: flex;
 	flex-wrap: nowrap;
+	align-items: center;
 }
 
 .ace-user-logout {
 	margin-left: 1.5rem;
 }
 
-
 .ace-content__shortcut{
 	display: flex;
 	justify-content: space-around;
-	margin-top: 2rem;
+	border-bottom: 1px solid #e8e5e5;
+	padding: 2rem 0;
+	margin-bottom: 2rem;
 }
 .ace-content__shortcut--jobs,
 .ace-content__shortcut--exames,
@@ -203,7 +215,7 @@ body {
 	color: #f8f8f8;
 	font-size: 2.2rem;
 	border-radius: 5px;
-		background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
 	background-size: 400% 400%;
 	-webkit-animation: Gradient 15s ease infinite;
 	-moz-animation: Gradient 15s ease infinite;
@@ -215,6 +227,85 @@ body {
 	font-weight: 700;
 	cursor: pointer;
 }
+.ace-recents {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	padding: 0 1rem !important;
+}
+.ace-recent{
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	margin: 0 1.5rem 2rem;
+	max-width: 240px;
+	text-align: center;
+}
+figure{
+	width: 100%;
+	margin-bottom: 1rem;
+}
+figure img{
+	width: 100%;
+	border-radius: 5px;
+}
+.ace-recent a {
+	border-radius: 5px;
+	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
+	color: #fff;
+	font-family: 'Lato' sans-serif;
+	font-size: .8rem;
+	text-transform: uppercase;
+	margin-bottom: .5rem;
+}
+
+.ace-user-avatar{
+	border-radius: 50%;
+	height: 32px;
+	object-fit: cover;
+	overflow: hidden;
+	width: 32px;
+	margin: 0 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @-webkit-keyframes Gradient {

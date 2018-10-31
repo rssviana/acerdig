@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+.ace-nav{
+    padding-top: 2.5rem !important;
+}
+.ace-nav a {
+    font-size: 1rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500 !important;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+.ace-nav a::before {
+    display: inline;
+    content: "-";
+    margin: 0 .5rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+}

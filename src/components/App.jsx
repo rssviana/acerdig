@@ -10,6 +10,7 @@ import './App.css'
 
 import SignIn from './SignIn/SignIn.jsx'
 import SignUp from './SignUp/SignUp.jsx'
+import SignUp2 from './SignUp/SignUp2.jsx'
 import Dashboard from './Dashboard/Dashboard.jsx'
 import Upload from './Upload/Upload.jsx'
 
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path="/" exact component={SignIn} />
           <Route path="/sign-in" exact component={SignIn} />
           <Route path="/sign-up" exact component={SignUp} />
+          <Route path="/sign-up2" exact component={SignUp2} />
           <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/upload" exact component={Upload} />
           <Redirect to="/" />

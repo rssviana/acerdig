@@ -1,7 +1,7 @@
 import React from 'react'
 import firebase from '../../firebase'
 import 'firebase/auth'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
 class Signup extends React.Component {
     constructor(props) {
@@ -30,8 +30,10 @@ class Signup extends React.Component {
             .auth()
             .createUserWithEmailAndPassword(this.state.login, this.state.pass)
             .then(user => {
-                this.setState({ logginIsCreated: true, loading: false })
-                console.log(user)
+                this.setState({ logginIsCreated: true, loading: false }, () => {
+                    this.props.history.push('/sign-up2')
+                })
+
             })
             .catch(function (error) {
                 console.error(error)
@@ -85,4 +87,4 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup
+export default withRouter(Signup)
