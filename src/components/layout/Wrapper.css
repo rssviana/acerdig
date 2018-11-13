@@ -1,0 +1,29 @@
+.ace-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.ace-nav {
+    display: none;
+}
+
+@media screen and (min-width: 992px) {
+    .ace-wrapper {
+        display: grid;
+        grid-template-areas: "header" " content";
+        grid-template-columns: 1fr;
+        grid-template-rows: 70px 1fr;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .ace-wrapper {
+        display: grid;
+        grid-template-areas: "header header" "menu content";
+        grid-template-columns: 240px 1fr;
+        grid-template-rows: 70px 1fr;
+    }
+    .ace-nav {
+        display: flex;
+    }
+}
+    

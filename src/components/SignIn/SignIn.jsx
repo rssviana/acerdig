@@ -122,7 +122,7 @@ class SignIn extends Component {
                                     contentLabel="Example Modal"
                                 >
                                     <p>Por favor, insira seu email para que possamos enviar um email de recuperação de senha.</p>
-                                    <form action="" method="">
+                                    <form action="" method="POST" onSubmit={this.handleLostPass}>
                                         <fieldset>
                                             <legend>Recupere sua senha</legend>
                                             <p>
@@ -134,6 +134,7 @@ class SignIn extends Component {
                                                     value={this.state.login}
                                                     onChange={this.handleChange}
                                                 />
+                                                <button type="submit">Recuperar senha</button>
                                             </p>
                                         </fieldset>
                                     </form>

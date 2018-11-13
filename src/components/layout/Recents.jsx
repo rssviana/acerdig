@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import sample from '../statics/images/sample.jpg'
+import sample from '../statics/images/book-icon.png'
 import firebase from '../../firebase'
 import 'firebase/firestore'
 
@@ -30,7 +30,20 @@ class Recents extends React.Component {
     renderDocs() {
         return (
             this.state.docs.map(file => {
-                return <div>{file.fileName}</div>
+                return(
+                    <li className="ace-recent">
+                        <figure className="ace-recent__figure">
+                            <img src={sample} alt={file.fileName} />
+                            <figcaption className="ace-recent__figcaption">{file.fileName}</figcaption>
+                        </figure>
+                        <p>{file.fileDescription}</p>
+                        <b>{file.fileAutor}</b>
+                        <p>{file.fileType}</p>
+                        <Link to="/">Ver +</Link>
+                        <Link to="/">Download</Link>
+                    </li>
+
+                ) 
             })
         )
     }
@@ -41,36 +54,14 @@ class Recents extends React.Component {
                 <ul className="ace-recents">
                     <h3>Artigos</h3>
                     {this.renderDocs()}
-                    <li className="ace-recent">
-                        <figure className="ace-recent__figure">
-                            <img src={sample} alt="Prova de Física" />
-                            <figcaption className="ace-recent__figcaption">Prova de Física</figcaption>
-                        </figure>
-                        <Link to="/">Ver +</Link>
-                        <Link to="/">Download</Link>
-                    </li>
                 </ul>
                 <ul className="ace-recents">
                     <h3>Exames</h3>
-                    <li className="ace-recent">
-                        <figure className="ace-recent__figure">
-                            <img src={sample} alt="Prova de Física" />
-                            <figcaption className="ace-recent__figcaption">Prova de Física</figcaption>
-                        </figure>
-                        <Link to="/">Ver +</Link>
-                        <Link to="/">Download</Link>
-                    </li>
+                    {this.renderDocs()}
                 </ul>
                 <ul className="ace-recents">
                     <h3>Trabalhos</h3>
-                    <li className="ace-recent">
-                        <figure className="ace-recent__figure">
-                            <img src={sample} alt="Prova de Física" />
-                            <figcaption className="ace-recent__figcaption">Prova de Física</figcaption>
-                        </figure>
-                        <Link to="/">Ver +</Link>
-                        <Link to="/">Download</Link>
-                    </li>
+                    {this.renderDocs()}
                 </ul>
             </div>
         )

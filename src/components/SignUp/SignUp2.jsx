@@ -8,19 +8,27 @@ class Signup2 extends React.Component {
         super(props)
 
         this.state = {
-            displayName: '',
             avatar: '',
-            baseUrl: 'https://firebasestorage.googleapis.com/v0/b/acerdig-4edc5.appspot.com/o/avatars%2F',
             avatarURL: [
-                'boy-1.png', 'boy.png', 'girl.png', 'girl-1.png', 'man-1.png', 'man-2.png', 'man-3.png', 'man-4.png', 'man.png'
+                'boy-1.png', 
+                'boy.png', 
+                'girl.png', 
+                'girl-1.png', 
+                'man-1.png', 
+                'man-2.png', 
+                'man-3.png', 
+                'man-4.png', 
+                'man.png'
             ],
+            baseUrl: 'https://firebasestorage.googleapis.com/v0/b/acerdig-4edc5.appspot.com/o/avatars%2F',
             currentAvtr: '',
             currentUser: null,
+            displayName: '',
         }
 
         this.handleChange = this.handleChange.bind(this)
-        this.renderAvatars = this.renderAvatars.bind(this)
         this.handleUpdateProfile = this.handleUpdateProfile.bind(this)
+        this.renderAvatars = this.renderAvatars.bind(this)
 
         firebase.auth().onAuthStateChanged(currentUser => this.setState({ currentUser }))
     }
@@ -42,55 +50,59 @@ class Signup2 extends React.Component {
     handleUpdateProfile(e) {
         e.preventDefault()
         const user = this.state.currentUser
-
         const photoURL = `${this.state.baseUrl}${this.state.currentAvtr}?alt=media`
 
-        console.log({ photoURL, user })
+        let theUser = this.state.displayName
+        let avatar = this.state.currentAvtr
 
-        user.updateProfile({
-            displayName: this.state.displayName,
-            photoURL
-        }).then(() => {
-            this.props.history.push('/dashboard')
-        }).catch(error => {
-            alert('Não foi possivel alterar seus dados no momento, tente novamente mais tarde !')
-        })
+        if(theUser !== '' && avatar !== '') {
+            user.updateProfile({
+                displayName: this.state.displayName,
+                photoURL
+            }).then(() => {
+                this.props.history.push('/dashboard')
+            }).catch(error => {
+                alert('Não foi possivel alterar seus dados no momento, tente novamente mais tarde !')
+            })  
+        }else{
+            alert("Por favo escolha um avatar e um apelido.")
+        }
+
     }
 
     render() {
-        const logginIsCreated = this.state.logginIsCreated
-
         return (
-            <div>
-                {logginIsCreated ? (
-                    <Redirect to="/dashboard" />
-                ) : (
-                        <div className="ace-form_container">
-                            <div className="ace-heading">
-                                <h1 className="ace-heading__title">Acerdig</h1>
-                                <p className="ace-heading__subtitle">Seu acervo digital</p>
-                            </div>
-                            <form className="ace-form" method="POST" action="" onSubmit={this.handleUpdateProfile}>
-                                <fieldset>
-                                    <legend>Mais Informações</legend>
-                                    <ul className="ace-form__listofavatars">
-                                        {this.renderAvatars()}
-                                    </ul>
-                                    <p>
-                                        <label htmlFor="displayName">Name</label>
-                                        <input
-                                            type="displayName"
-                                            name="displayName"
-                                            id="displayName"
-                                            value={this.state.displayName}
-                                            onChange={this.handleChange}
-                                        />
-                                    </p>
-                                    <button type="submit">Cadastrar</button>
-                                </fieldset>
-                            </form>
-                        </div>
-                    )}
+            <div className="ace-form_container">
+                <div className="ace-heading">
+                    <h1 className="ace-heading__title">Acerdig</h1>
+                    <p className="ace-heading__subtitle">Seu acervo digital</p>
+                </div>
+                <form className="ace-form" method="POST" action="" onSubmit={this.handleUpdateProfile}>
+                    <fieldset>
+                        <legend>Mais Informações</legend>
+                        <ul className="ace-form__listofavatars">
+                            <label>Escolha seu avatar</label>
+                            {this.renderAvatars()}
+                            {this.state.currentAvtr !== '' && (
+                                <div>
+                                    <p>Você escolheu o seguinte avatar:</p>
+                                    <img className="avatar-choosen" src={`${this.state.baseUrl}${this.state.currentAvtr}?alt=media`} alt="avatar" />
+                                </div>
+                            )}
+                        </ul>
+                        <p>
+                            <label htmlFor="displayName">Apelido</label>
+                            <input
+                                type="displayName"
+                                name="displayName"
+                                id="displayName"
+                                value={this.state.displayName}
+                                onChange={this.handleChange}
+                            />
+                        </p>
+                        <button type="submit">Cadastrar</button>
+                    </fieldset>
+                </form>
             </div>
         )
     }

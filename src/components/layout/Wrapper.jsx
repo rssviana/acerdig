@@ -1,10 +1,12 @@
 import React from 'react'
-import { oneOfType, element, arrayOf } from 'prop-types'
+import { oneOfType, element, arrayOf, bool } from 'prop-types'
 import firebase from '../../firebase'
 import 'firebase/auth'
 import Menu from './Menu'
-import Sample from '../statics/images/sample.jpg'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
+import Shortcut from './Shortcut'
+
+import './Wrapper.css'
 
 window.fire = firebase
 
@@ -13,7 +15,9 @@ class Wrapper extends React.Component {
         super(props)
 
         this.state = {
-            currentUser: null
+            currentUser: null,
+            hasMenu: this.props.hasMenu,
+            hasShortcuts: this.props.hasShortcuts,
         }
 
         this.handleLogout = this.handleLogout.bind(this)
@@ -33,7 +37,9 @@ class Wrapper extends React.Component {
         return (
             <div className="ace-wrapper">
                 <header className="ace-header">
-                    <h1 className="ace-header__heading">Acerdig</h1>
+                    <Link to="/dashboard">
+                        <h1 className="ace-header__heading">Acerdig</h1>
+                    </Link>
                     {
                         currentUser && (
                             <div currentUser={currentUser} className="ace-user-credentials">
@@ -46,16 +52,15 @@ class Wrapper extends React.Component {
                         )
                     }
                 </header>
-                <Menu />
-                <div className="ace-content">
-                    <div className="ace-content__shortcut">
-                        <div className="ace-content__shortcut--jobs">Trabalhos</div>
-                        <div className="ace-content__shortcut--exames">Provas</div>
-                        <div className="ace-content__shortcut--articles">Artigos</div>
-                        <div className="ace-content__shortcut--articles">Contribua</div>
+                {this.state.hasMenu && (
+                    <Menu />
+                )}
+                {this.state.hasShortcuts && (
+                    <div className="ace-content">
+                        <Shortcut />
+                        {this.props.children}
                     </div>
-                    {this.props.children}
-                </div>
+                )}
             </div>
         )
     }
@@ -64,6 +69,7 @@ class Wrapper extends React.Component {
 
 Wrapper.propTypes = {
     children: oneOfType([element, arrayOf(element)]),
+    hasMenu: bool
 }
 
 export default withRouter(Wrapper)

@@ -10,6 +10,7 @@ class Signup extends React.Component {
         this.state = {
             login: '',
             pass: '',
+            repass: '',
             logginIsCreated: false,
             loading: false,
         }
@@ -26,18 +27,25 @@ class Signup extends React.Component {
 
     handleSignup(e) {
         e.preventDefault()
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(this.state.login, this.state.pass)
-            .then(user => {
-                this.setState({ logginIsCreated: true, loading: false }, () => {
-                    this.props.history.push('/sign-up2')
-                })
 
-            })
-            .catch(function (error) {
-                console.error(error)
-            })
+        let pass = this.state.pass
+        let repass = this.state.repass
+
+        if(pass === repass) {
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(this.state.login, this.state.pass)
+                .then(user => {
+                    this.setState({ logginIsCreated: true, loading: false }, () => {
+                        this.props.history.push('/sign-up2')
+                    })
+                })
+                .catch(function (error) {
+                    alert("Não foi possivel concretizar cadastro, tente novamente mais tarde.")
+                })
+        }else{
+            alert("Confirmação de senha está diferente de senha. Por favor digite a confirmação semelhante a senha.")
+        }
     }
 
     render() {
@@ -67,7 +75,7 @@ class Signup extends React.Component {
                                         />
                                     </p>
                                     <p>
-                                        <label htmlFor="pass">Password</label>
+                                        <label htmlFor="pass">Senha</label>
                                         <input
                                             type="password"
                                             name="pass"
@@ -76,6 +84,17 @@ class Signup extends React.Component {
                                             onChange={this.handleChange}
                                         />
                                     </p>
+                                    <p>
+                                        <label htmlFor="pass"> Confirme Senha</label>
+                                        <input
+                                            type="password"
+                                            name="repass"
+                                            id="repass"
+                                            value={this.state.repass}
+                                            onChange={this.handleChange}
+                                        />
+                                    </p>
+
 
                                     <button onClick={() => { this.setState({ loading: true }) }} type="submit">Cadastrar</button>
                                 </fieldset>
