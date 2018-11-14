@@ -21,7 +21,7 @@ class UploadFile extends React.Component {
             fileTags: [],
         }
 
-        this.handlechange = this.handlechange.bind(this)
+        this.handleChange = this.handleChange.bind(this)
         this.handleFile = this.handleFile.bind(this)
         this.handleUpload = this.handleUpload.bind(this)
         this.onChangeFileTags = this.onChangeFileTags.bind(this)
@@ -29,7 +29,7 @@ class UploadFile extends React.Component {
         firebase.auth().onAuthStateChanged(currentUser => this.setState({ currentUser }))
     }
 
-    handlechange({ target }) {
+    handleChange({ target }) {
         this.setState({
             [target.name]: target.value
         })
@@ -57,18 +57,19 @@ class UploadFile extends React.Component {
         const fileAutor = currentUser.displayName
 
         const storage = firebase.storage()
-        const firestore = firebase.firestore()
+        const storageRef = storage.ref()
+        const db = firebase.firestore()
 
-        const uuidFile = '12345'
+        const uuidFile = `${fileType}-${fileAutor}-${fileName}`
 
-        const fileRef = storage.ref().child(fileType).child(uuidFile)
+        const fileRef = storageRef.child(fileType).child(uuidFile)
 
-        // Upload file and set properties on Firestore
+        // Upload file and set properties on db
         fileRef.put(file)
             .then(snapshot => {
-                console.log('Uploaded file', snapshot)
+                alert(`Arquivo ${snapshot} enviado com sucesso`)
 
-                const ref = firestore.collection(fileType)
+                const ref = db.collection(fileType)
 
                 ref.add({
                     fileName,
@@ -80,13 +81,10 @@ class UploadFile extends React.Component {
                     userId: currentUser.uid,
                     created_at: new Date(),
                 }).then(snapshot => {
-                    this.setState({ loading: false })
                     console.log("File properties saved", snapshot)
-                    alert('Arquivo enviado com sucesso!')
                 })
             })
             .catch(error => {
-                this.setState({ loading: false })
                 console.log("Uploaded file error", error)
                 alert('Houve um problema com o envio do arquivo! Tente novamente mais tarde.')
             })
@@ -108,7 +106,7 @@ class UploadFile extends React.Component {
                                 type="text"
                                 name="fileName"
                                 id="filename"
-                                onChange={this.handlechange}
+                                onChange={this.handleChange}
                             />
                         </p>
                         <p>
@@ -118,7 +116,7 @@ class UploadFile extends React.Component {
                                 id="fileDescription"
                                 cols="30"
                                 rows="10"
-                                onChange={this.handlechange}
+                                onChange={this.handleChange}
                             ></textarea>
                         </p>
                         <p>
@@ -133,7 +131,7 @@ class UploadFile extends React.Component {
                         </p>
                         <p>
                             <label htmlFor="fileType">Tipo</label>
-                            <select name="fileType" id="fileType" onChange={this.handlechange}>
+                            <select name="fileType" id="fileType" onChange={this.handleChange}>
                                 <option value="outros">Outros</option>
                                 <option value="exame">Exame</option>
                                 <option value="artigo">Artigo</option>
