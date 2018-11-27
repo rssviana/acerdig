@@ -5,6 +5,7 @@ import 'firebase/storage'
 import 'firebase/auth'
 import Wrapper from '../layout/Wrapper'
 import Tags from './Tags'
+import { withRouter } from 'react-router-dom'
 
 class UploadFile extends React.Component {
     constructor(props) {
@@ -14,14 +15,14 @@ class UploadFile extends React.Component {
             file: null,
             fileName: '',
             fileDescription: '',
-            fileType: '',
+            fileType: 'outros',
             currentUser: {
                 displayName: '',
             },
             fileTags: [],
         }
 
-        this.handleChange = this.handleChange.bind(this)
+        this.handlechange = this.handlechange.bind(this)
         this.handleFile = this.handleFile.bind(this)
         this.handleUpload = this.handleUpload.bind(this)
         this.onChangeFileTags = this.onChangeFileTags.bind(this)
@@ -29,7 +30,7 @@ class UploadFile extends React.Component {
         firebase.auth().onAuthStateChanged(currentUser => this.setState({ currentUser }))
     }
 
-    handleChange({ target }) {
+    handlechange({ target }) {
         this.setState({
             [target.name]: target.value
         })
@@ -57,19 +58,28 @@ class UploadFile extends React.Component {
         const fileAutor = currentUser.displayName
 
         const storage = firebase.storage()
-        const storageRef = storage.ref()
-        const db = firebase.firestore()
+        const firestore = firebase.firestore()
 
-        const uuidFile = `${fileType}-${fileAutor}-${fileName}`
+        // // Old:
+        // const date = snapshot.get('created_at');
+        // // New:
+        // const timestamp = snapshot.get('created_at');
+        // const date = timestamp.toDate();
 
-        const fileRef = storageRef.child(fileType).child(uuidFile)
+        // let uuidRef = firestore.collection('files')
+        
+        // const uuidFile = uuidRef.id
+        // const uuidFile = fileRef.getId()
+        // const uuidFile = fileRef.key
 
-        // Upload file and set properties on db
+        const fileRef = storage.ref().child('Files').child(`${fileAutor}_${fileName}`)
+
+        // Upload file and set properties on Firestore
         fileRef.put(file)
             .then(snapshot => {
-                alert(`Arquivo ${snapshot} enviado com sucesso`)
+                console.log('Uploaded file', snapshot)
 
-                const ref = db.collection(fileType)
+                const ref = firestore.collection('Files')
 
                 ref.add({
                     fileName,
@@ -77,14 +87,19 @@ class UploadFile extends React.Component {
                     fileAutor,
                     fileType,
                     fileTags,
-                    fileReference: uuidFile,
+                    // fileReference: uuidFile,
                     userId: currentUser.uid,
                     created_at: new Date(),
                 }).then(snapshot => {
+                    this.setState({ loading: false })
                     console.log("File properties saved", snapshot)
+                    alert('Arquivo enviado com sucesso!')
+                    this.props.history.push('/dashboard')
+                    
                 })
             })
             .catch(error => {
+                this.setState({ loading: false })
                 console.log("Uploaded file error", error)
                 alert('Houve um problema com o envio do arquivo! Tente novamente mais tarde.')
             })
@@ -97,16 +112,17 @@ class UploadFile extends React.Component {
     render() {
         return (
             <Wrapper hasMenu={false} hasShortcuts={false}>
-                <form method="POST" action="" onSubmit={this.handleUpload}>
+                <form className="ace-upload" method="POST" action="" onSubmit={this.handleUpload}>
+                    <h2>Faça upload de uma prova, artigo ou trabalho e ajude seus amigos</h2>
+                    <h3>Envie seu arquivo até 5mb</h3>
                     <fieldset>
-                        <legend>Envie seu arquivo até 5mb</legend>
                         <p>
                             <label htmlFor="fileName">Nome do arquivo</label>
                             <input
                                 type="text"
                                 name="fileName"
                                 id="filename"
-                                onChange={this.handleChange}
+                                onChange={this.handlechange}
                             />
                         </p>
                         <p>
@@ -116,7 +132,7 @@ class UploadFile extends React.Component {
                                 id="fileDescription"
                                 cols="30"
                                 rows="10"
-                                onChange={this.handleChange}
+                                onChange={this.handlechange}
                             ></textarea>
                         </p>
                         <p>
@@ -131,14 +147,17 @@ class UploadFile extends React.Component {
                         </p>
                         <p>
                             <label htmlFor="fileType">Tipo</label>
-                            <select name="fileType" id="fileType" onChange={this.handleChange}>
+                            <select name="fileType" id="fileType" onChange={this.handlechange}>
                                 <option value="outros">Outros</option>
                                 <option value="exame">Exame</option>
                                 <option value="artigo">Artigo</option>
                                 <option value="rabalho">Trabalho</option>
                             </select>
                         </p>
-                        <Tags onChange={this.onChangeFileTags} />
+                        <p>
+                            <span>Digite Tags relacionadas ao seu arquivo, depois aperte "Enter"</span>
+                            <Tags onChange={this.onChangeFileTags} />
+                        </p>
                         <p>
                             <label htmlFor="file">File</label>
                             <input
@@ -158,4 +177,4 @@ class UploadFile extends React.Component {
 
 UploadFile.propTypes = {}
 
-export default UploadFile
+export default withRouter(UploadFile)

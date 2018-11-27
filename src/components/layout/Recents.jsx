@@ -24,7 +24,7 @@ class Recents extends React.Component {
     }
 
     componentDidMount() {
-        db.collection('exame').orderBy("created_at", "desc").onSnapshot(this.updateFiles)
+        db.collection('Files').orderBy("created_at", "desc").onSnapshot(this.updateFiles)
     }
 
     renderDocs() {
@@ -36,10 +36,9 @@ class Recents extends React.Component {
                             <img src={sample} alt={file.fileName} />
                             <figcaption className="ace-recent__figcaption">{file.fileName}</figcaption>
                         </figure>
-                        <p>{file.fileDescription}</p>
                         <b>{file.fileAutor}</b>
                         <p>{file.fileType}</p>
-                        <Link to="/">Ver +</Link>
+                        {/* <Link to="/">Ver +</Link> */}
                         <Link to="/">Download</Link>
                     </li>
 
@@ -50,17 +49,9 @@ class Recents extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="ace-body">
                 <ul className="ace-recents">
-                    <h3>Artigos</h3>
-                    {this.renderDocs()}
-                </ul>
-                <ul className="ace-recents">
-                    <h3>Exames</h3>
-                    {this.renderDocs()}
-                </ul>
-                <ul className="ace-recents">
-                    <h3>Trabalhos</h3>
+                    <h3>Recentes</h3>
                     {this.renderDocs()}
                 </ul>
             </div>

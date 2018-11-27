@@ -49,6 +49,8 @@
     justify-content: center;
 	margin-bottom: 1rem;
 }
+.ace-shortcut__item a{ color: #fff; }
+
 @media screen and (min-width: 992px) {
     .ace-shortcut__item{
         font-size: 1.2rem;

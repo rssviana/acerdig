@@ -42,7 +42,7 @@ class Wrapper extends React.Component {
                     </Link>
                     {
                         currentUser && (
-                            <div currentUser={currentUser} className="ace-user-credentials">
+                            <div className="ace-user-credentials">
                                 <img src={currentUser.photoURL} className="ace-user-avatar" alt="My Self" />
                                 <details>
                                     <summary>{currentUser.displayName}</summary>
@@ -54,12 +54,16 @@ class Wrapper extends React.Component {
                         )
                     }
                 </header>
-                {this.state.hasMenu && (
+                {/* {this.state.hasMenu && (
                     <Menu />
-                )}
-                {this.state.hasShortcuts && (
+                )} */}
+                {this.state.hasShortcuts ? (
                     <div className="ace-content">
                         <Shortcut />
+                        {this.props.children}
+                    </div>
+                ) : (
+                    <div className="ace-content">
                         {this.props.children}
                     </div>
                 )}

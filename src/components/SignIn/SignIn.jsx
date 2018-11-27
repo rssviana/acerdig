@@ -63,7 +63,6 @@ class SignIn extends Component {
             .signInWithEmailAndPassword(this.state.login, this.state.pass)
             .then(user => {
                 this.setState({ isLogged: true })
-                console.log(user)
             })
             .catch(function (error) {
                 var errorCode = error.code

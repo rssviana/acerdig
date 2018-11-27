@@ -14,10 +14,7 @@ class Tags extends React.Component {
         super(props);
 
         this.state = {
-            tags: [
-                { id: "Thailand", text: "Thailand" },
-                { id: "India", text: "India" }
-            ],
+            tags: [],
             suggestions: [
                 { id: 'USA', text: 'USA' },
                 { id: 'Germany', text: 'Germany' },
