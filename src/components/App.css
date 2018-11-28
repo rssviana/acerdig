@@ -411,8 +411,9 @@ figure img{
     width: 100%;
     background-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+	padding: 14px 20px;
+	margin: 8px 0;
+	font-size: 1.4rem;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -429,6 +430,22 @@ figure img{
 	text-align: center;
 }
 
+
+.ace-loading {
+	align-items: center;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 9999;
+}
+
+.ace-loading img{
+	border-radius: 2.2rem;
+}
 
 
 

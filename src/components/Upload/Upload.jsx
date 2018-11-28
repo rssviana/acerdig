@@ -6,6 +6,8 @@ import 'firebase/auth'
 import Wrapper from '../layout/Wrapper'
 import Tags from './Tags'
 import { withRouter } from 'react-router-dom'
+import uuidv4  from  'uuid/v4'
+import Loading from '../layout/Loading'
 
 class UploadFile extends React.Component {
     constructor(props) {
@@ -20,6 +22,7 @@ class UploadFile extends React.Component {
                 displayName: '',
             },
             fileTags: [],
+            isLoading: false,
         }
 
         this.handlechange = this.handlechange.bind(this)
@@ -46,6 +49,8 @@ class UploadFile extends React.Component {
     handleUpload(e) {
         e.preventDefault()
 
+        this.setState({ isLoading: true })
+
         const {
             currentUser,
             file,
@@ -55,26 +60,14 @@ class UploadFile extends React.Component {
             fileTags,
         } = this.state
 
+        const fileUuid = uuidv4()
         const fileAutor = currentUser.displayName
 
         const storage = firebase.storage()
         const firestore = firebase.firestore()
 
-        // // Old:
-        // const date = snapshot.get('created_at');
-        // // New:
-        // const timestamp = snapshot.get('created_at');
-        // const date = timestamp.toDate();
+        const fileRef = storage.ref().child('Files').child(fileUuid)
 
-        // let uuidRef = firestore.collection('files')
-        
-        // const uuidFile = uuidRef.id
-        // const uuidFile = fileRef.getId()
-        // const uuidFile = fileRef.key
-
-        const fileRef = storage.ref().child('Files').child(`${fileAutor}_${fileName}`)
-
-        // Upload file and set properties on Firestore
         fileRef.put(file)
             .then(snapshot => {
                 console.log('Uploaded file', snapshot)
@@ -87,15 +80,13 @@ class UploadFile extends React.Component {
                     fileAutor,
                     fileType,
                     fileTags,
-                    // fileReference: uuidFile,
+                    fileReference: fileUuid,
                     userId: currentUser.uid,
                     created_at: new Date(),
                 }).then(snapshot => {
-                    this.setState({ loading: false })
+                    this.setState({ isLoading: false })
                     console.log("File properties saved", snapshot)
-                    alert('Arquivo enviado com sucesso!')
-                    this.props.history.push('/dashboard')
-                    
+                    alert('Arquivo enviado com sucesso! Sinta-se a vontade para subir mais arquivos.')
                 })
             })
             .catch(error => {
@@ -112,6 +103,9 @@ class UploadFile extends React.Component {
     render() {
         return (
             <Wrapper hasMenu={false} hasShortcuts={false}>
+            { this.state.isLoading && (
+                <Loading  />
+            )}
                 <form className="ace-upload" method="POST" action="" onSubmit={this.handleUpload}>
                     <h2>Faça upload de uma prova, artigo ou trabalho e ajude seus amigos</h2>
                     <h3>Envie seu arquivo até 5mb</h3>

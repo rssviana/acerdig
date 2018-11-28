@@ -46,8 +46,8 @@ class Wrapper extends React.Component {
                                 <img src={currentUser.photoURL} className="ace-user-avatar" alt="My Self" />
                                 <details>
                                     <summary>{currentUser.displayName}</summary>
-                                    <Link to="/my-things" className="ace-user-logout">My things</Link>
-                                    <Link to="/profile" className="ace-user-logout">Profile</Link>
+                                    {/* <Link to="/my-things" className="ace-user-logout">My things</Link>
+                                    <Link to="/profile" className="ace-user-logout">Profile</Link> */}
                                     <p onClick={this.handleLogout} className="ace-user-logout">Logout</p>
                                 </details>
                             </div>
