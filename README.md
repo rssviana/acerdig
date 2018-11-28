@@ -1,4 +1,4 @@
-![Acerdig - Acervo Digital](https://drive.google.com/file/d/10XWMb8tkdV9QxuTmgPGA-nC_fqvd2lmN "Acerdig")
+![Acerdig - Acervo Digital](https://drive.google.com/file/d/10XWMb8tkdV9QxuTmgPGA-nC_fqvd2lmN)
 
 ***
 
@@ -24,4 +24,4 @@ just this :D
 > Crie Issues com bugs, ou novas funcionalidades que achem necessárias
 > Crie Pull Requests se tiverem algo top para ajudar.
 
-https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif
+![Perfumaria](https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif)
