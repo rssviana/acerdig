@@ -6,7 +6,7 @@ import 'firebase/auth'
 import Wrapper from '../layout/Wrapper'
 import Tags from './Tags'
 import { withRouter } from 'react-router-dom'
-import uuidv4  from  'uuid/v4'
+import uuidv4 from 'uuid/v4'
 import Loading from '../layout/Loading'
 
 class UploadFile extends React.Component {
@@ -85,13 +85,11 @@ class UploadFile extends React.Component {
                     created_at: new Date(),
                 }).then(snapshot => {
                     this.setState({ isLoading: false })
-                    console.log("File properties saved", snapshot)
                     alert('Arquivo enviado com sucesso! Sinta-se a vontade para subir mais arquivos.')
                 })
             })
             .catch(error => {
                 this.setState({ loading: false })
-                console.log("Uploaded file error", error)
                 alert('Houve um problema com o envio do arquivo! Tente novamente mais tarde.')
             })
     }
@@ -102,10 +100,10 @@ class UploadFile extends React.Component {
 
     render() {
         return (
-            <Wrapper hasMenu={false} hasShortcuts={false}>
-            { this.state.isLoading && (
-                <Loading  />
-            )}
+            <Wrapper hasShortcuts={false}>
+                {this.state.isLoading && (
+                    <Loading />
+                )}
                 <form className="ace-upload" method="POST" action="" onSubmit={this.handleUpload}>
                     <h2>Faça upload de uma prova, artigo ou trabalho e ajude seus amigos</h2>
                     <h3>Envie seu arquivo até 5mb</h3>

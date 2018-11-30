@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import sample from '../statics/images/book-icon.png'
 import firebase from '../../firebase'
 import 'firebase/firestore'
@@ -18,7 +17,7 @@ class Recents extends React.Component {
 
         this.updateFiles = this.updateFiles.bind(this)
         this.renderDocs = this.renderDocs.bind(this)
-        this.handleDownload =  this.handleDownload.bind(this)
+        this.handleDownload = this.handleDownload.bind(this)
     }
 
     updateFiles(snapshot) {
@@ -31,9 +30,9 @@ class Recents extends React.Component {
     }
 
     handleDownload(uuid) {
-        storage.ref(`Files/${uuid}`).getDownloadURL().then(function(url) {
-            window.location =  url
-        }).catch(function(error) {
+        storage.ref(`Files/${uuid}`).getDownloadURL().then(function (url) {
+            window.location = url
+        }).catch(function (error) {
             alert('Não foi possivel realizar download no momento!')
         });
     }
@@ -41,7 +40,7 @@ class Recents extends React.Component {
     renderDocs() {
         return (
             this.state.docs.map(file => {
-                return(
+                return (
                     <li className="ace-recent">
                         <figure className="ace-recent__figure">
                             <img src={sample} alt={file.fileName} />
@@ -49,9 +48,9 @@ class Recents extends React.Component {
                         </figure>
                         <b>{file.fileAutor}</b>
                         <p>{file.fileType}</p>
-                        <a onClick={() => { this.handleDownload(file.fileReference) }}>Download</a>
+                        <div onClick={() => { this.handleDownload(file.fileReference) }}>Download</div>
                     </li>
-                ) 
+                )
             })
         )
     }

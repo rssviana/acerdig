@@ -2,7 +2,6 @@ import React from 'react'
 import { oneOfType, element, arrayOf, bool } from 'prop-types'
 import firebase from '../../firebase'
 import 'firebase/auth'
-import Menu from './Menu'
 import { withRouter, Link } from 'react-router-dom'
 import Shortcut from './Shortcut'
 
@@ -54,19 +53,16 @@ class Wrapper extends React.Component {
                         )
                     }
                 </header>
-                {/* {this.state.hasMenu && (
-                    <Menu />
-                )} */}
                 {this.state.hasShortcuts ? (
                     <div className="ace-content">
                         <Shortcut />
                         {this.props.children}
                     </div>
                 ) : (
-                    <div className="ace-content">
-                        {this.props.children}
-                    </div>
-                )}
+                        <div className="ace-content">
+                            {this.props.children}
+                        </div>
+                    )}
             </div>
         )
     }

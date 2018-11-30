@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import firebase from '../../firebase'
 import 'firebase/auth'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import Loading from '../layout/Loading'
 import Modal from 'react-modal'
-
-import './SignIn.css'
 
 class SignIn extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            login: '',
-            pass: '',
+            isLoading: false,
             isLogged: false,
+            login: '',
             modalIsOpen: false,
+            pass: '',
         }
 
         this.closeModal = this.closeModal.bind(this)
@@ -25,18 +25,13 @@ class SignIn extends Component {
         this.openModal = this.openModal.bind(this)
     }
 
-    openModal() {
-        this.setState({ modalIsOpen: true });
-    }
-
-    closeModal() {
-        this.setState({ modalIsOpen: false });
-    }
-
     handleDisconectLogin() {
+        this.setState({ isLoading: true })
         firebase.auth().signOut().then(function () {
+            this.setState({ isLoading: false })
             alert('Até mais.')
         }).catch(function (error) {
+            this.setState({ isLoading: false })
             alert('Por algum motivo, não foi efetuado o loggout! tente novamente mais tarde!')
         });
     }
@@ -48,23 +43,29 @@ class SignIn extends Component {
     }
 
     handleLostPass() {
+        this.setState({ isLoading: true })
         const auth = firebase.auth()
         auth.sendPasswordResetEmail(this.state.login).then(function () {
+            this.setState({ isLoading: false })
             alert("Um email foi enviado para você com mais detalhes para a recuperação de senha.")
         }).catch(function (error) {
+            this.setState({ isLoading: false })
             alert("Por algum motivo não conseguimos enviar o email de recuperação. Tente novamente mais tarde.")
         });
     }
 
     handleLogin(e) {
         e.preventDefault()
+        this.setState({ isLoading: true })
         firebase
             .auth()
             .signInWithEmailAndPassword(this.state.login, this.state.pass)
             .then(user => {
-                this.setState({ isLogged: true })
+                this.setState({ isLogged: true, isLoading: false })
+                this.props.history.push('/dashboard')
             })
             .catch(function (error) {
+                this.setState({ isLoading: false })
                 var errorCode = error.code
                 var errorMessage = error.message
                 if (errorCode === 'auth/invalid-email') { alert('email inválido.') }
@@ -75,12 +76,11 @@ class SignIn extends Component {
     }
 
     render() {
-        const isLoggedIn = this.state.isLogged
-
+        const isLoading = this.state.isLoading
         return (
             <div>
-                {isLoggedIn ? (
-                    <Redirect to="/dashboard" />
+                {isLoading ? (
+                    <Loading />
                 ) : (
                         <div className="ace-form_container">
                             <div className="ace-heading">
@@ -118,7 +118,7 @@ class SignIn extends Component {
                                     isOpen={this.state.modalIsOpen}
                                     onAfterOpen={this.afterOpenModal}
                                     onRequestClose={this.closeModal}
-                                    contentLabel="Example Modal"
+                                    contentLabel="Password Recovery"
                                 >
                                     <p>Por favor, insira seu email para que possamos enviar um email de recuperação de senha.</p>
                                     <form action="" method="POST" onSubmit={this.handleLostPass}>
@@ -147,4 +147,4 @@ class SignIn extends Component {
     }
 }
 
-export default SignIn;
+export default withRouter(SignIn)
