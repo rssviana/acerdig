@@ -2,6 +2,7 @@ import React from 'react'
 import firebase from '../../firebase'
 import 'firebase/auth'
 import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class Signup extends React.Component {
     constructor(props) {
@@ -17,8 +18,12 @@ class Signup extends React.Component {
 
         this.handleSignup = this.handleSignup.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.goHome = this.goHome.bind(this)
     }
 
+    goHome(){
+        this.props.history.push('/sign-in')
+    }
     handleChange({ target }) {
         this.setState({
             [target.name]: target.value,
@@ -59,6 +64,7 @@ class Signup extends React.Component {
                         <div className="ace-form_container">
                             <div className="ace-heading">
                                 <h1 className="ace-heading__title">Acerdig</h1>
+                                <h1 className="ace-heading__title" onClick={this.goHome}>Acerdig</h1>
                                 <p className="ace-heading__subtitle">Seu acervo digital</p>
                             </div>
                             <form className="ace-form" method="POST" action="" onSubmit={this.handleSignup}>

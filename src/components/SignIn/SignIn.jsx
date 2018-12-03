@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from '../../firebase'
 import 'firebase/auth'
 import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter, Redirect } from 'react-router-dom'
 import Loading from '../layout/Loading'
 import Modal from 'react-modal'
 
@@ -10,6 +11,7 @@ class SignIn extends Component {
         super(props)
 
         this.state = {
+            currentUser: null,
             isLoading: false,
             isLogged: false,
             login: '',
@@ -23,6 +25,8 @@ class SignIn extends Component {
         this.handleLogin = this.handleLogin.bind(this)
         this.handleLostPass = this.handleLostPass.bind(this)
         this.openModal = this.openModal.bind(this)
+        this.goHome = this.goHome.bind(this)
+        firebase.auth().onAuthStateChanged(currentUser => this.setState({ currentUser }))   
     }
 
     handleDisconectLogin() {
@@ -34,6 +38,8 @@ class SignIn extends Component {
             this.setState({ isLoading: false })
             alert('Por algum motivo, não foi efetuado o loggout! tente novamente mais tarde!')
         });
+    goHome(){
+        this.props.history.push('/sign-in')
     }
 
     handleChange({ target }) {
@@ -85,6 +91,7 @@ class SignIn extends Component {
                         <div className="ace-form_container">
                             <div className="ace-heading">
                                 <h1 className="ace-heading__title">Acerdig</h1>
+                                <h1 className="ace-heading__title" onClick={this.goHome}>Acerdig</h1>
                                 <p className="ace-heading__subtitle">Seu acervo digital</p>
                             </div>
                             <form className="ace-form" method="POST" action="" onSubmit={this.handleLogin}>
@@ -138,6 +145,7 @@ class SignIn extends Component {
                                         </fieldset>
                                     </form>
                                 </Modal>
+                                <Link className="ace-form__lostpass" to="/recover-pass">Perdeu a senha</Link>
                                 <Link className="ace-form__link" to="/sign-up">Cadastre-se</Link>
                             </form>
                         </div>

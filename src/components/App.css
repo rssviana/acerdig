@@ -84,6 +84,7 @@ details p {
 }
 
 .ace-heading__title {
+	cursor: pointer;
 	text-transform: capitalize;
 	font-size: 2.5rem;
 	font-family: 'Lobster', cursive;
@@ -341,7 +342,7 @@ figure img {
 	border-radius: 5px;
 }
 
-.ace-recent a {
+.ace-recent div {
 	border-radius: 5px;
 	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
 	background-size: 400% 400%;
@@ -476,7 +477,7 @@ select {
 
 
 .ace-loading {
-	background: rgba(255, 255, 255, .6);
+	background: #f8f8f8;
 	align-items: center;
 	display: flex;
 	height: 100vh;
@@ -489,7 +490,8 @@ select {
 }
 
 .ace-loading img {
-	border-radius: 2.2rem;
+	border-radius: 50%;
+	border: 1px solid #ccc;
 	height: 100px;
 	width: 100px;
 }

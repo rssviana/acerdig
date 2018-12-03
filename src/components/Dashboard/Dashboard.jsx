@@ -3,6 +3,7 @@ import firebase from '../../firebase'
 import 'firebase/auth'
 import Wrapper from '../layout/Wrapper'
 import Recents from '../layout/Recents'
+import { Redirect } from 'react-router-dom'
 
 import './Dashboard.css'
 
@@ -20,9 +21,13 @@ export default class Dashboard extends Component {
     render() {
         return (
             <div>
-                <Wrapper hasMenu={true} hasShortcuts={true}>
-                    <Recents />
-                </Wrapper>
+                {this.state.currentUser !== null ? (
+                    <Wrapper hasMenu={true} hasShortcuts={true}>
+                        <Recents />
+                    </Wrapper>    
+                ) :(
+                    <Redirect to="/sign-in" />
+                )}
             </div>
         )
     }

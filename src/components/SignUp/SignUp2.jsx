@@ -29,10 +29,14 @@ class Signup2 extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleUpdateProfile = this.handleUpdateProfile.bind(this)
         this.renderAvatars = this.renderAvatars.bind(this)
+        this.goHome = this.goHome.bind(this)
 
         firebase.auth().onAuthStateChanged(currentUser => this.setState({ currentUser }))
     }
 
+    goHome(){
+        this.props.history.push('/sign-in')
+    }
     handleChange({ target }) {
         this.setState({
             [target.name]: target.value,
@@ -103,6 +107,7 @@ class Signup2 extends React.Component {
                         <button type="submit">Cadastrar</button>
                     </fieldset>
                 </form>
+                            <h1 className="ace-heading__title" onClick={this.goHome}>Acerdig</h1>
             </div>
         )
     }
