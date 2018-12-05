@@ -4,10 +4,7 @@ import 'firebase/auth'
 import Wrapper from '../layout/Wrapper'
 import Recents from '../layout/Recents'
 
-
-window.fire = firebase
-
-export default class Dashboard extends Component {
+export default class Artigos extends Component {
     constructor(props) {
         super(props)
 

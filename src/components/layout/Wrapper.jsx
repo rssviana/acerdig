@@ -7,8 +7,6 @@ import Shortcut from './Shortcut'
 
 import './Wrapper.css'
 
-window.fire = firebase
-
 class Wrapper extends React.Component {
     constructor(props) {
         super(props)
@@ -25,10 +23,14 @@ class Wrapper extends React.Component {
     }
 
     handleLogout() {
-        firebase.auth().signOut().then(() => {
-            this.props.history.push('/sign-in')
-        },
-            function (error) { alert('Algo de errado não esta certo, tente novamente!') })
+        firebase.auth()
+            .signOut()
+            .then(() => {
+                this.props.history.push('/sign-in')
+            })
+            .catch(error => {
+                alert('Algo de errado não esta certo, tente novamente!')
+            })
     }
 
     render() {
@@ -45,9 +47,15 @@ class Wrapper extends React.Component {
                                 <img src={currentUser.photoURL} className="ace-user-avatar" alt="My Self" />
                                 <details>
                                     <summary>{currentUser.displayName}</summary>
-                                    {/* <Link to="/my-things" className="ace-user-logout">My things</Link>
-                                    <Link to="/profile" className="ace-user-logout">Profile</Link> */}
-                                    <p onClick={this.handleLogout} className="ace-user-logout">Logout</p>
+                                    <div className="ace-user-actions" >
+                                        <p className="ace-user-logout">
+                                            <Link to="/things" className="ace-user-logout">My things</Link>
+                                        </p>
+                                        <p className="ace-user-logout">
+                                            <Link to="/profile" className="ace-user-logout">Profile</Link>
+                                        </p>
+                                        <p onClick={this.handleLogout} className="ace-user-logout">Logout</p>
+                                    </div>
                                 </details>
                             </div>
                         )

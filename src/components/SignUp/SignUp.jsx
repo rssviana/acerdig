@@ -1,7 +1,8 @@
 import React from 'react'
 import firebase from '../../firebase'
 import 'firebase/auth'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import Loading from '../layout/Loading'
 
 class Signup extends React.Component {
     constructor(props) {
@@ -11,8 +12,8 @@ class Signup extends React.Component {
             login: '',
             pass: '',
             repass: '',
-            logginIsCreated: false,
             loading: false,
+            isLoading: false,
         }
 
         this.handleSignup = this.handleSignup.bind(this)
@@ -36,33 +37,34 @@ class Signup extends React.Component {
         let repass = this.state.repass
 
         if(pass === repass) {
+            this.setState({ isLoading: true })
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(this.state.login, this.state.pass)
-                .then(user => {
-                    this.setState({ logginIsCreated: true, loading: false }, () => {
-                        this.props.history.push('/sign-up2')
+                    .then(user => {
+                        this.setState({ isLoading: false }, (state) => {
+                            this.props.history.push('/sign-up2')
+                        })
                     })
-                })
-                .catch(function (error) {
-                    alert("Não foi possivel concretizar cadastro, tente novamente mais tarde.")
-                })
+                    .catch(error => {
+                        this.setState({ isLoading: false }, () => {
+                            alert("Não foi possivel concretizar cadastro, tente novamente mais tarde.")
+                        })
+                    })
         }else{
             alert("Confirmação de senha está diferente de senha. Por favor digite a confirmação semelhante a senha.")
         }
     }
 
     render() {
-        const logginIsCreated = this.state.logginIsCreated
 
         return (
             <div>
-                {logginIsCreated ? (
-                    <Redirect to="/dashboard" />
+                {this.state.isLoading ? (
+                    <Loading />
                 ) : (
                         <div className="ace-form_container">
                             <div className="ace-heading">
-                                <h1 className="ace-heading__title">Acerdig</h1>
                                 <h1 className="ace-heading__title" onClick={this.goHome}>Acerdig</h1>
                                 <p className="ace-heading__subtitle">Seu acervo digital</p>
                             </div>
@@ -101,7 +103,7 @@ class Signup extends React.Component {
                                     </p>
 
 
-                                    <button onClick={() => { this.setState({ loading: true }) }} type="submit">Cadastrar</button>
+                                    <button type="submit">Cadastrar</button>
                                 </fieldset>
                             </form>
                         </div>

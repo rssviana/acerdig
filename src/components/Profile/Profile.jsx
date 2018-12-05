@@ -2,12 +2,8 @@ import React, { Component } from 'react'
 import firebase from '../../firebase'
 import 'firebase/auth'
 import Wrapper from '../layout/Wrapper'
-import Recents from '../layout/Recents'
 
-
-window.fire = firebase
-
-export default class Dashboard extends Component {
+export default class Profile extends Component {
     constructor(props) {
         super(props)
 
@@ -20,9 +16,7 @@ export default class Dashboard extends Component {
 
     render() {
         return (
-            <Wrapper hasShortcuts={true}>
-                <Recents />
-            </Wrapper>
+            <Wrapper hasShortcuts={false} />
         )
     }
 }

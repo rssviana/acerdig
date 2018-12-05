@@ -44,20 +44,20 @@ class SignIn extends Component {
         firebase
             .auth()
             .signInWithEmailAndPassword(this.state.login, this.state.pass)
-            .then(user => {
-                this.setState({ isLoading: false }, () => {
-                    this.props.history.push('/dashboard')
+                .then(user => {
+                    this.setState({ isLoading: false }, () => {
+                        this.props.history.push('/dashboard')
+                    })
                 })
-            })
-            .catch(function (error) {
-                this.setState({ isLoading: false })
-                var errorCode = error.code
-                var errorMessage = error.message
-                if (errorCode === 'auth/invalid-email') { alert('email inválido.') }
-                else if (errorCode === 'auth/user-not-found') { alert('Usuário não encontrado.') }
-                else if (errorCode === 'auth/wrong-password') { alert('Senha incorreta.') }
-                else { console.log(errorMessage) }
-            })
+                .catch(error => {
+                    this.setState({ isLoading: false })
+                    var errorCode = error.code
+                    var errorMessage = error.message
+                    if (errorCode === 'auth/invalid-email') { alert('email inválido.') }
+                    else if (errorCode === 'auth/user-not-found') { alert('Usuário não encontrado.') }
+                    else if (errorCode === 'auth/wrong-password') { alert('Senha incorreta.') }
+                    else { console.log(errorMessage) }
+                })
     }
 
     render() {

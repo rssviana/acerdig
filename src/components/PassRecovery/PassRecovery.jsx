@@ -33,13 +33,15 @@ class PassRecovery extends Component {
     handleLostPass() {
         this.setState({ isLoading: true })
         const auth = firebase.auth()
-        auth.sendPasswordResetEmail(this.state.login).then(function () {
+        auth.sendPasswordResetEmail(this.state.login).then((state) => {
             alert("Um email foi enviado para você com mais detalhes para a recuperação de senha.")
             this.setState({ isLoading: false}, () => {
                 this.props.history.push('/sign-in')
             })
-        }).catch(function (error) { 
-            console.log("Por algum motivo não conseguimos enviar o email de recuperação. Tente novamente mais tarde.")
+        }).catch(error => { 
+            this.setState({ isLoading: false}, () => {
+                alert("Por algum motivo não conseguimos enviar o email de recuperação. Tente novamente mais tarde.")
+            })
         })
     }
 
