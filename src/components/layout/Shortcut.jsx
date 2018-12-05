@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import './Shortcut.css'
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom'
 import Result from './Result'
 import Modal from 'react-modal'
@@ -42,6 +41,7 @@ class Shortcut extends Component {
                         indexName="Files"
                     >
                         <SearchBox />
+                        <p className="ais-heading" >Resultados: </p>
                         <Hits hitComponent={Result} escapeHits={true} />
                     </InstantSearch>
                 </Modal>

@@ -2,7 +2,6 @@ import React from 'react'
 import firebase from '../../firebase'
 import 'firebase/auth'
 import { Redirect, withRouter } from 'react-router-dom'
-import { withRouter } from 'react-router-dom'
 
 class Signup extends React.Component {
     constructor(props) {

@@ -78,7 +78,7 @@ class Signup2 extends React.Component {
         return (
             <div className="ace-form_container">
                 <div className="ace-heading">
-                    <h1 className="ace-heading__title">Acerdig</h1>
+                    <h1 className="ace-heading__title" onClick={this.goHome}>Acerdig</h1>
                     <p className="ace-heading__subtitle">Seu acervo digital</p>
                 </div>
                 <form className="ace-form" method="POST" action="" onSubmit={this.handleUpdateProfile}>
@@ -107,7 +107,6 @@ class Signup2 extends React.Component {
                         <button type="submit">Cadastrar</button>
                     </fieldset>
                 </form>
-                            <h1 className="ace-heading__title" onClick={this.goHome}>Acerdig</h1>
             </div>
         )
     }

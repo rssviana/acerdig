@@ -14,21 +14,14 @@ class PassRecovery extends Component {
         }
        
         this.handleChange = this.handleChange.bind(this)
-        this.handleLoading =  this.handleLoading.bind(this)
         this.handleLostPass = this.handleLostPass.bind(this)
         this.goHome = this.goHome.bind(this)
+
+        firebase.auth().onAuthStateChanged(currentUser => this.setState({ currentUser }))
     }
 
     goHome(){
         this.props.history.push('/sign-in')
-    }
-
-    handleLoading(condition) {
-        if(condition === true) {
-            this.setState({ isLoading: true })
-        } else {
-            this.setState({ isLoading: false })
-        }
     }
 
     handleChange({ target }) {
@@ -38,12 +31,15 @@ class PassRecovery extends Component {
     }
 
     handleLostPass() {
+        this.setState({ isLoading: true })
         const auth = firebase.auth()
         auth.sendPasswordResetEmail(this.state.login).then(function () {
             alert("Um email foi enviado para você com mais detalhes para a recuperação de senha.")
-            this.props.history.push('/sign-in')
-        }).catch(function (error) {
-            alert("Por algum motivo não conseguimos enviar o email de recuperação. Tente novamente mais tarde.")
+            this.setState({ isLoading: false}, () => {
+                this.props.history.push('/sign-in')
+            })
+        }).catch(function (error) { 
+            console.log("Por algum motivo não conseguimos enviar o email de recuperação. Tente novamente mais tarde.")
         })
     }
 
