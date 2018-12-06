@@ -1,6 +1,6 @@
 import React from 'react'
-import sample from '../statics/images/book-icon.png'
-import firebase from '../../firebase'
+import sample from '../../statics/images/book-icon.png'
+import firebase from '../../../firebase'
 import 'firebase/firestore'
 import 'firebase/storage'
 
@@ -17,9 +17,9 @@ class Recents extends React.Component {
 			docs: [],
 		}
 
-		this.updateFiles = this.updateFiles.bind(this)
-		this.renderDocs = this.renderDocs.bind(this)
 		this.handleDownload = this.handleDownload.bind(this)
+		this.renderDocs = this.renderDocs.bind(this)
+		this.updateFiles = this.updateFiles.bind(this)
 	}
 
 	updateFiles(snapshot) {
