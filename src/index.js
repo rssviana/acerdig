@@ -1,6 +1,6 @@
-import React from 'react';
-import reactDOM from 'react-dom';
-import App from './components/App.jsx';
+import React from 'react'
+import reactDOM from 'react-dom'
+import App from './components/App.jsx'
 
 // import * as serviceWorker from './serviceWorker';
 

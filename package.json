@@ -16,13 +16,6 @@
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
-    "eslint": "5.6.0",
-    "eslint-config-react-app": "^3.0.3",
-    "eslint-loader": "2.1.1",
-    "eslint-plugin-flowtype": "2.50.1",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.1",
-    "eslint-plugin-react": "7.11.1",
     "file-loader": "2.0.0",
     "fs-extra": "7.0.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
@@ -56,9 +49,6 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -75,7 +65,17 @@
     "react-router-dom": "^4.3.1",
     "react-tag-input": "^6.0.2",
     "redux": "^4.0.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "eslint": "5.6.0",
+    "eslint-config-react-app": "^3.0.3",
+    "eslint-loader": "2.1.1",
+    "eslint-plugin-flowtype": "2.50.1",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.1",
+    "eslint-plugin-react": "7.11.1",
+		"eslint-config-prettier": "^2.9.0",
+		"eslint-plugin-prettier": "^2.6.2",
+		"prettier": "1.13.7"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -117,5 +117,68 @@
     "presets": [
       "react-app"
     ]
-  }
+  },
+	"eslintConfig": {
+		"env": {
+			"browser": true,
+			"commonjs": true,
+			"es6": true,
+			"node": true
+		},
+		"extends": [
+      "react-app",
+			"plugin:react/recommended",
+			"eslint:recommended",
+			"plugin:prettier/recommended"
+		],
+		"parserOptions": {
+			"ecmaFeatures": {
+				"jsx": true
+			},
+			"ecmaVersion": 2018,
+			"sourceType": "module"
+		},
+		"plugins": [
+			"react"
+		],
+		"rules": {
+			"react/prop-types": "warn",
+			"no-console": "warn",
+			"no-unused-vars": "warn",
+			"comma-dangle": [
+				"error",
+				"only-multiline"
+			],
+			"indent": [
+				"error",
+				"tab",
+				{
+					"SwitchCase": 1
+				}
+			],
+			"linebreak-style": [
+				"error",
+				"windows"
+			],
+			"quotes": [
+				"error",
+				"single"
+			],
+			"semi": [
+				"error",
+				"never"
+			]
+		}
+	},
+	"prettier": {
+		"printWidth": 80,
+		"tabWidth": 2,
+		"useTabs": true,
+		"semi": false,
+		"singleQuote": true,
+		"trailingComma": "es5",
+		"bracketSpacing": true,
+		"jsxBracketSameLine": true,
+		"arrowParens": "avoid"
+	}
 }
