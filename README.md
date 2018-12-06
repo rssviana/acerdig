@@ -1,7 +1,7 @@
-
 # Acerdig
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![Acerdig - Acervo Digital](https://scontent.fsdu17-1.fna.fbcdn.net/v/t1.0-9/46830978_2270035236405171_9115411741742727168_o.jpg?_nc_cat=109&_nc_ht=scontent.fsdu17-1.fna&oh=c7dc76beb3383c3f5bf3cb32f3ddde55&oe=5C68EDCB)
 
