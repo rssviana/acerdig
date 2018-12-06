@@ -167,7 +167,7 @@ class UploadFile extends React.Component {
 						</p>
 						<p>
 							<span>
-								Digite Tags relacionadas ao seu arquivo, depois aperte "Enter"
+								Digite Tags relacionadas ao seu arquivo, depois aperte {'Enter'}
 							</span>
 							<Tags onChange={this.onChangeFileTags} />
 						</p>

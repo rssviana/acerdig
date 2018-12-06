@@ -5,6 +5,8 @@ import 'firebase/firestore'
 import 'firebase/storage'
 
 const db = firebase.firestore()
+db.settings({ timestampsInSnapshots: true })
+
 const storage = firebase.storage()
 
 class Recents extends React.Component {
@@ -46,7 +48,7 @@ class Recents extends React.Component {
 	renderDocs() {
 		return this.state.docs.map(file => {
 			return (
-				<li key={file.fileReference} className="ace-recent">
+				<li key={file.created_at} className="ace-recent">
 					<figure className="ace-recent__figure">
 						<img src={sample} alt={file.fileName} />
 						<figcaption className="ace-recent__figcaption">
