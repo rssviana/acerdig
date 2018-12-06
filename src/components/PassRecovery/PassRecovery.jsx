@@ -54,7 +54,7 @@ class PassRecovery extends Component {
 			})
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.setState({ isLoading: false })
 	}
 
