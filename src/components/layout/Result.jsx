@@ -1,18 +1,16 @@
 import React from 'react'
 
 class Result extends React.Component {
-    constructor(props){
-        super(props)
+	constructor(props) {
+		super(props)
 
-        this.state = {}
-    }
+		this.state = {}
+	}
 
-    render() {
-        const file = this.props.hit
-        return (
-            <a href="#">{`${file.fileAutor} - ${file.fileName}`}</a>
-        )
-    }
+	render() {
+		const file = this.props.hit
+		return <span>{`${file.fileAutor} - ${file.fileName}`}</span>
+	}
 }
 
 export default Result

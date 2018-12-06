@@ -9,21 +9,23 @@ import './Dashboard.css'
 window.fire = firebase
 
 export default class Dashboard extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            currentUser: null,
-        }
+	constructor(props) {
+		super(props)
+		this.state = {
+			currentUser: null,
+		}
 
-        firebase.auth().onAuthStateChanged(currentUser => this.setState({ currentUser }))
-    }
-    render() {
-        return (
-            <div>
-                <Wrapper hasMenu={true} hasShortcuts={true}>
-                    <Recents />
-                </Wrapper>
-            </div>
-        )
-    }
+		firebase
+			.auth()
+			.onAuthStateChanged(currentUser => this.setState({ currentUser }))
+	}
+	render() {
+		return (
+			<div>
+				<Wrapper hasMenu={true} hasShortcuts={true}>
+					<Recents />
+				</Wrapper>
+			</div>
+		)
+	}
 }
