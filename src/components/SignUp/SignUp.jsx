@@ -42,9 +42,7 @@ class Signup extends React.Component {
 				.auth()
 				.createUserWithEmailAndPassword(this.state.login, this.state.pass)
 				.then(user => {
-					this.setState({ isLoading: false }, state => {
-						this.props.history.push('/sign-up2')
-					})
+					this.props.history.push('/sign-up2')
 				})
 				.catch(error => {
 					this.setState({ isLoading: false }, () => {

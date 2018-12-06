@@ -3,6 +3,7 @@ import firebase from '../../firebase'
 import 'firebase/auth'
 import { Link, withRouter } from 'react-router-dom'
 import Loading from '../layout/Loading'
+import { firebaseUser } from '../../firebase'
 
 class SignIn extends Component {
 	constructor(props) {
@@ -19,9 +20,9 @@ class SignIn extends Component {
 		this.handleChange = this.handleChange.bind(this)
 		this.handleLogin = this.handleLogin.bind(this)
 		this.isAlreadyLogged = this.isAlreadyLogged.bind(this)
-		firebase
-			.auth()
-			.onAuthStateChanged(currentUser => this.setState({ currentUser }))
+		// firebase
+		// 	.auth()
+		// 	.onAuthStateChanged(currentUser => this.setState({ currentUser }))
 	}
 
 	isAlreadyLogged() {
@@ -47,9 +48,9 @@ class SignIn extends Component {
 			.auth()
 			.signInWithEmailAndPassword(this.state.login, this.state.pass)
 			.then(user => {
-				this.setState({ isLoading: false }, () => {
-					this.props.history.push('/dashboard')
-				})
+				console.log('sign-in user', user, firebaseUser())
+
+				this.props.history.push('/dashboard')
 			})
 			.catch(error => {
 				this.setState({ isLoading: false })

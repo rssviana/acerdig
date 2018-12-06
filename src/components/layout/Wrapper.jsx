@@ -4,10 +4,13 @@ import firebase from '../../firebase'
 import 'firebase/auth'
 import { withRouter, Link } from 'react-router-dom'
 import Shortcut from './Shortcut'
+import FirebaseContext from '../FirebaseContext'
 
 import './Wrapper.css'
 
 class Wrapper extends React.Component {
+	static contextType = FirebaseContext
+
 	constructor(props) {
 		super(props)
 
@@ -18,10 +21,6 @@ class Wrapper extends React.Component {
 		}
 
 		this.handleLogout = this.handleLogout.bind(this)
-
-		firebase
-			.auth()
-			.onAuthStateChanged(currentUser => this.setState({ currentUser }))
 	}
 
 	handleLogout() {
@@ -37,7 +36,8 @@ class Wrapper extends React.Component {
 	}
 
 	render() {
-		const currentUser = this.state.currentUser
+		const currentUser = this.context.auth.currentUser // Pega o usuário logado pelo contexto
+
 		return (
 			<div className="ace-wrapper">
 				<header className="ace-header">
@@ -47,12 +47,15 @@ class Wrapper extends React.Component {
 					{currentUser && (
 						<div className="ace-user-credentials">
 							<img
-								src={currentUser.photoURL}
+								src={
+									currentUser.photoURL ||
+									'http://chittagongit.com//images/icon-for-profile/icon-for-profile-12.jpg'
+								}
 								className="ace-user-avatar"
 								alt="My Self"
 							/>
 							<details>
-								<summary>{currentUser.displayName}</summary>
+								<summary>{currentUser.displayName || 'No one'}</summary>
 								<div className="ace-user-actions">
 									<p className="ace-user-logout">
 										<Link to="/things" className="ace-user-logout">

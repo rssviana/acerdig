@@ -16,10 +16,6 @@ class PassRecovery extends Component {
 		this.handleChange = this.handleChange.bind(this)
 		this.handleLostPass = this.handleLostPass.bind(this)
 		this.goHome = this.goHome.bind(this)
-
-		firebase
-			.auth()
-			.onAuthStateChanged(currentUser => this.setState({ currentUser }))
 	}
 
 	goHome() {

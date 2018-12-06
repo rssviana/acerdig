@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import 'firebase/auth'
 
 var config = {
 	apiKey: 'AIzaSyARHS4KRRrDpjhdWA0xLAEE2SJIvGG4Suk',
@@ -10,5 +11,7 @@ var config = {
 }
 
 const fire = firebase.initializeApp(config)
+
+export const firebaseUser = () => fire.auth().currentUser
 
 export default fire

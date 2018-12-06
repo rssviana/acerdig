@@ -32,11 +32,11 @@ class Signup2 extends React.Component {
 		this.handleChange = this.handleChange.bind(this)
 		this.handleUpdateProfile = this.handleUpdateProfile.bind(this)
 		this.renderAvatars = this.renderAvatars.bind(this)
-		this.goHome = this.goHome.bind(this)
+		// this.goHome = this.goHome.bind(this)
 
-		firebase
-			.auth()
-			.onAuthStateChanged(currentUser => this.setState({ currentUser }))
+		// firebase
+		// 	.auth()
+		// 	.onAuthStateChanged(currentUser => this.setState({ currentUser }))
 	}
 
 	handleChange({ target }) {
@@ -65,7 +65,7 @@ class Signup2 extends React.Component {
 
 	handleUpdateProfile(e) {
 		e.preventDefault()
-		const user = this.state.currentUser
+		const user = this.props.currentUser
 		const photoURL = `${this.state.baseUrl}${this.state.currentAvtr}?alt=media`
 
 		let theUser = this.state.displayName
