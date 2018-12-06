@@ -5,21 +5,21 @@ import Wrapper from '../layout/Wrapper'
 import Recents from '../layout/Recents'
 
 export default class Trabalhos extends Component {
-    constructor(props) {
-        super(props)
+	constructor(props) {
+		super(props)
 
-        this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
-            if (!user) {
-                this.props.history.push('/sign-in')
-            }
-        })
-    }
+		this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
+			if (!user) {
+				this.props.history.push('/sign-in')
+			}
+		})
+	}
 
-    render() {
-        return (
-            <Wrapper hasShortcuts={true}>
-                <Recents />
-            </Wrapper>
-        )
-    }
+	render() {
+		return (
+			<Wrapper hasShortcuts={true}>
+				<Recents />
+			</Wrapper>
+		)
+	}
 }

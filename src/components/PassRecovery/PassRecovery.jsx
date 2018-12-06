@@ -5,84 +5,102 @@ import { withRouter } from 'react-router-dom'
 import Loading from '../layout/Loading'
 
 class PassRecovery extends Component {
-    constructor(props) {
-        super(props)
+	constructor(props) {
+		super(props)
 
-        this.state = {
-            isLoading: false,
-            login: '',
-        }
-       
-        this.handleChange = this.handleChange.bind(this)
-        this.handleLostPass = this.handleLostPass.bind(this)
-        this.goHome = this.goHome.bind(this)
+		this.state = {
+			isLoading: false,
+			login: '',
+		}
 
-        firebase.auth().onAuthStateChanged(currentUser => this.setState({ currentUser }))
-    }
+		this.handleChange = this.handleChange.bind(this)
+		this.handleLostPass = this.handleLostPass.bind(this)
+		this.goHome = this.goHome.bind(this)
 
-    goHome(){
-        this.props.history.push('/sign-in')
-    }
+		firebase
+			.auth()
+			.onAuthStateChanged(currentUser => this.setState({ currentUser }))
+	}
 
-    handleChange({ target }) {
-        this.setState({
-            [target.name]: target.value,
-        })
-    }
+	goHome() {
+		this.props.history.push('/sign-in')
+	}
 
-    handleLostPass() {
-        this.setState({ isLoading: true })
-        const auth = firebase.auth()
-        auth.sendPasswordResetEmail(this.state.login).then((state) => {
-            alert("Um email foi enviado para você com mais detalhes para a recuperação de senha.")
-            this.setState({ isLoading: false}, () => {
-                this.props.history.push('/sign-in')
-            })
-        }).catch(error => { 
-            this.setState({ isLoading: false}, () => {
-                alert("Por algum motivo não conseguimos enviar o email de recuperação. Tente novamente mais tarde.")
-            })
-        })
-    }
+	handleChange({ target }) {
+		this.setState({
+			[target.name]: target.value,
+		})
+	}
 
-    componentWillMount() {
-        this.setState({ isLoading: false })
-    }
+	handleLostPass() {
+		this.setState({ isLoading: true })
+		const auth = firebase.auth()
+		auth
+			.sendPasswordResetEmail(this.state.login)
+			.then(state => {
+				alert(
+					'Um email foi enviado para você com mais detalhes para a recuperação de senha.'
+				)
+				this.setState({ isLoading: false }, () => {
+					this.props.history.push('/sign-in')
+				})
+			})
+			.catch(error => {
+				this.setState({ isLoading: false }, () => {
+					alert(
+						'Por algum motivo não conseguimos enviar o email de recuperação. Tente novamente mais tarde.'
+					)
+				})
+			})
+	}
 
-    render() {
-        const isLoading = this.state.isLoading
-        return (
-            <div className="ace-passrecovery">
-                {isLoading ? (
-                    <Loading />
-                ) : (
-                    <div className="ace-form_container">
-                        <div className="ace-heading">
-                            <h1 className="ace-heading__title" onClick={this.goHome}>Acerdig</h1>
-                            <p className="ace-heading__subtitle">Seu acervo digital</p>
-                        </div>
-                        <form action="" className="ace-form" method="" onSubmit={this.handleLostPass}>
-                            <fieldset>
-                                <legend>Recupere sua senha</legend>
-                                <p>Por favor, insira seu email para que possamos enviar um email de recuperação de senha.</p>
-                                <p>
-                                    <label htmlFor="login">Email</label>
-                                    <input
-                                        type="login"
-                                        name="login"
-                                        id="login"
-                                        value={this.state.login}
-                                        onChange={this.handleChange}
-                                    />
-                                    <button type="submit">Recuperar senha</button>
-                                </p>
-                            </fieldset>
-                        </form>
-                    </div>
-                )}
-            </div>
-        )
-    }
+	componentWillMount() {
+		this.setState({ isLoading: false })
+	}
+
+	render() {
+		const isLoading = this.state.isLoading
+		return (
+			<div className="ace-passrecovery">
+				{isLoading ? (
+					<Loading />
+				) : (
+					<div className="ace-form_container">
+						<div className="ace-heading">
+							<h1 className="ace-heading__title" onClick={this.goHome}>
+								Acerdig
+							</h1>
+							<p className="ace-heading__subtitle">Seu acervo digital</p>
+						</div>
+						<form
+							action=""
+							className="ace-form"
+							method=""
+							onSubmit={this.handleLostPass}>
+							<fieldset>
+								<legend>Recupere sua senha</legend>
+								<p>
+									Por favor, insira seu email para que possamos enviar um email
+									de recuperação de senha.
+								</p>
+								<p>
+									<label htmlFor="login">Email</label>
+									<input
+										type="login"
+										name="login"
+										id="login"
+										value={this.state.login}
+										onChange={this.handleChange}
+									/>
+									<button type="submit">Recuperar senha</button>
+								</p>
+							</fieldset>
+						</form>
+					</div>
+				)}
+			</div>
+		)
+	}
 }
 
 export default withRouter(PassRecovery)
