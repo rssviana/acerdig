@@ -71,10 +71,8 @@ class Recents extends React.Component {
 	render() {
 		return (
 			<div className="ace-body">
-				<ul className="ace-recents">
-					<h3>Recentes</h3>
-					{this.renderDocs()}
-				</ul>
+				<h3 className="ace-recents__heading">Recentes</h3>
+				<ul className="ace-recents">{this.renderDocs()}</ul>
 			</div>
 		)
 	}

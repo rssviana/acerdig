@@ -42,7 +42,6 @@ class UploadFile extends React.Component {
 	}
 
 	handleFile({ target }) {
-		console.log(target.files)
 		this.setState({
 			[target.name]: target.files[0],
 		})
@@ -76,8 +75,6 @@ class UploadFile extends React.Component {
 		fileRef
 			.put(file)
 			.then(snapshot => {
-				console.log('Uploaded file', snapshot)
-
 				const ref = firestore.collection('Files')
 
 				ref

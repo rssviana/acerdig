@@ -74,10 +74,8 @@ export default class Artigos extends Component {
 	render() {
 		return (
 			<Wrapper hasShortcuts={true}>
-				<ul className="ace-recents">
-					<h3>Artigos</h3>
-					{this.renderArticles()}
-				</ul>
+				<h3 className="ace-recents__heading">Artigos</h3>
+				<ul className="ace-recents">{this.renderArticles()}</ul>
 			</Wrapper>
 		)
 	}

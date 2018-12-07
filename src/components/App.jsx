@@ -33,7 +33,6 @@ class App extends Component {
 
 	componentDidMount() {
 		firebase.auth().onAuthStateChanged(user => {
-			console.log('auth changed user, demora essa porra a atualizar pqp', user)
 			this.setState({
 				auth: {
 					currentUser: user,

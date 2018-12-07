@@ -74,10 +74,8 @@ export default class Trabalhos extends Component {
 	render() {
 		return (
 			<Wrapper hasShortcuts={true}>
-				<ul className="ace-recents">
-					<h3>Artigos</h3>
-					{this.renderTrabalhos()}
-				</ul>
+				<h3 className="ace-recents__heading">Trabalhos</h3>
+				<ul className="ace-recents">{this.renderTrabalhos()}</ul>
 			</Wrapper>
 		)
 	}
