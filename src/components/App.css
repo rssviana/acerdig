@@ -57,6 +57,10 @@ details p:last-child {
 	border: none;
 }
 
+.ace-nothing-found {
+	max-width: 490px;
+	margin: 0 auto;
+}
 
 .ace-user-actions {
 	background: #f8f8f8;
@@ -94,6 +98,7 @@ details p:last-child {
 	height: 20vh;
 	justify-content: center;
 	width: 100%;
+	z-index: 9999;
 }
 
 @media screen and (min-width: 992px) {
@@ -339,7 +344,7 @@ details p:last-child {
 		display: grid;
 		grid-row-gap: 1.1rem;
 		grid-template-columns: repeat(3, 1fr);
-		margin: 0 auto;
+		margin: 0 auto 10rem;
 	}
 }
 
@@ -394,6 +399,7 @@ details p:last-child {
 .ace-recent div {
 	cursor: pointer;
 	line-height: 3rem;
+	margin-top: 1rem;
 }
 
 figure {
@@ -404,6 +410,7 @@ figure {
 figure img {
 	width: 100%;
 	border-radius: 5px;
+	margin-bottom: 1rem;
 }
 
 .ace-recent div {
@@ -430,6 +437,7 @@ figure img {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	position: relative;
+	z-index: 1;
 }
 
 .ace-form__listofavatars {
@@ -544,7 +552,7 @@ select {
 	background: #f8f8f8;
 	align-items: center;
 	display: flex;
-	height: 100vh;
+	height: 120vh;
 	justify-content: center;
 	left: 0;
 	position: absolute;
@@ -584,7 +592,8 @@ select {
 		grid-gap: 1rem;
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: 1fr 1fr;
-		margin: 0 1.2rem 2rem;
+		margin: 0 auto 2rem;
+		max-width: 992px;
 		padding: 2rem 0;
 	}
 }
@@ -595,7 +604,6 @@ select {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-around;
-		margin: 0 0 2rem;
 		padding: 2rem 0;
 	}
 }

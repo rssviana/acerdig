@@ -13,8 +13,6 @@ const protect = Component => {
 		static contextType = FirebaseContext
 
 		render() {
-			console.log('Protected context', this.context)
-
 			// Se o usuário não estiver logado e já feita a verificação:
 			if (!this.context.isUserSignedIn && this.context.loading)
 				return <Redirect to="/sign-in" />
