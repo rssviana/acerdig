@@ -57,7 +57,7 @@
   ],
   "devDependencies": {
     "firebase": "^5.5.3",
-    "node-sass": "^4.9.4",
+    "node-sass": "^7.0.0",
     "react-instantsearch-dom": "^5.3.2",
     "react-materialize": "^2.4.6",
     "react-modal": "^3.6.1",
